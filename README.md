@@ -37,7 +37,7 @@ npm run sync       # re-pull products, prices, variants & collections from jamal
 
 ## Deploy
 
-**GitHub Pages:** `.github/workflows/pages.yml` builds with `BASE_PATH=/<repo>/` and deploys on every push. One-time setup: repo **Settings → Pages → Source: GitHub Actions**. The site is then at `https://<user>.github.io/<repo>/`.
+**GitHub Pages (branch deploy):** run `npm run build:pages`, commit the `docs/` folder and push. In **Settings → Pages**, set Source to *Deploy from a branch* with the folder set to `/docs`. The site is served at `https://<user>.github.io/<repo>/`. `docs/404.html` mirrors `index.html` so deep links load, and `.nojekyll` stops GitHub from running Jekyll over the build.
 
 
 Static SPA — deploy `dist/` to Vercel (`vercel.json`) or Netlify (`public/_redirects`). Point a subdomain or the root domain at it; checkout stays on Shopify.
