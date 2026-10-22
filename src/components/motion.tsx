@@ -10,7 +10,7 @@ export function Reveal({ children, delay = 0, y = 40, className, ...rest }: { de
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10% 0px' }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      transition={{ duration: 0.7, delay, ease: EASE }}
       className={className}
       {...rest}
     >
@@ -31,7 +31,7 @@ export function SplitText({ text, className, delay = 0, as: Tag = 'span' }: { te
             initial={{ y: '110%', rotate: 6 }}
             whileInView={{ y: '0%', rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: delay + i * 0.06, ease: EASE }}
+            transition={{ duration: 0.7, delay: delay + i * 0.04, ease: EASE }}
           >
             {w}
             {i < words.length - 1 && ' '}

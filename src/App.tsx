@@ -28,8 +28,8 @@ export default function App() {
         <motion.main
           key={location.pathname}
           initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }}
-          exit={{ opacity: 0, y: -12, transition: { duration: 0.25 } }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
+          exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />

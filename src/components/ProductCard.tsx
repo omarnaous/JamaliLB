@@ -35,7 +35,7 @@ export function ProductCard({ product, index = 0, priority = false }: { product:
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-5% 0px' }}
-      transition={{ duration: 0.8, delay: (index % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: (index % 4) * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="group relative"
       onMouseLeave={() => setPicking(false)}
     >
