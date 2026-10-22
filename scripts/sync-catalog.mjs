@@ -83,7 +83,7 @@ const stripHtml = (html) =>
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<\/(p|li|h\d|div)>/gi, '\n')
     .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ')
+    .replace(/&nbsp;|\u00a0/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&#39;|&rsquo;/g, '’')
     .replace(/&quot;/g, '"')
