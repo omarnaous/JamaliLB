@@ -289,7 +289,8 @@ function Promises() {
 function Finale() {
   const f = useCurrentFrame();
   const { width: W, height: H, fps } = useVideoConfig();
-  const cx = W / 2, cy = 0.405 * H, R = 0.3 * W;
+  // lockup sits fully above Reels' caption overlay: every element's bottom edge <= 1400px
+  const cx = W / 2, cy = 682, R = 0.26 * W;
   const full = Math.hypot(W, H);
 
   // anticipation: the blush field sucks in to slightly smaller than final, waits in silence, then slams
@@ -336,11 +337,11 @@ function Finale() {
         )}
 
         {f >= T.hit && (
-          <div style={{ position: "absolute", left: 0, width: W, top: cy - 120, textAlign: "center", color: "#fff", transform: `scale(${wordScale})`, transformOrigin: `${cx}px 60px`, filter: `blur(${wordBlur}px)` }}>
-            <div style={{ fontFamily: SANS, fontWeight: 300, fontSize: 104, letterSpacing: `${tracking}em`, paddingLeft: `${tracking}em`, lineHeight: 1 }}>JAMALI</div>
+          <div style={{ position: "absolute", left: 0, width: W, top: cy - 104, textAlign: "center", color: "#fff", transform: `scale(${wordScale})`, transformOrigin: `${cx}px 52px`, filter: `blur(${wordBlur}px)` }}>
+            <div style={{ fontFamily: SANS, fontWeight: 300, fontSize: 90, letterSpacing: `${tracking}em`, paddingLeft: `${tracking}em`, lineHeight: 1 }}>JAMALI</div>
           </div>
         )}
-        <div lang="ar" style={{ position: "absolute", left: 0, width: W, top: cy + 10, textAlign: "center", fontFamily: AR, fontWeight: 300, fontSize: 96, color: "#fff", opacity: f >= T.arabic ? Math.min(1, ar * 1.5) : 0, transform: `translateY(${(1 - ar) * 40}px)`, direction: "rtl" }}>
+        <div lang="ar" style={{ position: "absolute", left: 0, width: W, top: cy + 8, textAlign: "center", fontFamily: AR, fontWeight: 300, fontSize: 84, color: "#fff", opacity: f >= T.arabic ? Math.min(1, ar * 1.5) : 0, transform: `translateY(${(1 - ar) * 40}px)`, direction: "rtl" }}>
           جمالي
         </div>
 
@@ -349,15 +350,15 @@ function Finale() {
           return <Sparkle key={i} size={s} color={i % 2 ? C.blushDeep : C.berry} style={{ position: "absolute", left: cx + dx * W * 1.05 - s / 2, top: cy + dy * W * 1.05 - s / 2, transform: `scale(${k * (1 + 0.08 * wave(f, 40, 1, i))}) rotate(${(1 - k) * 120 + wave(f, 80, 1, i) * 10}deg)` }} />;
         })}
 
-        <div style={{ position: "absolute", left: 0, width: W, top: 0.625 * H, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 104, color: C.ink, opacity: tag, transform: `translateY(${(1 - tag) * 30}px)` }}>
+        <div style={{ position: "absolute", left: 0, width: W, top: 1012, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 100, color: C.ink, opacity: tag, transform: `translateY(${(1 - tag) * 30}px)` }}>
           Pretty starts <span style={{ color: C.berry }}>here</span>
         </div>
-        <div style={{ position: "absolute", left: 0, width: W, top: 0.705 * H, display: "flex", justifyContent: "center" }}>
+        <div style={{ position: "absolute", left: 0, width: W, top: 1150, display: "flex", justifyContent: "center" }}>
           <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 46, color: C.cream, background: C.ink, borderRadius: 999, padding: "24px 52px", transform: `scale(${f >= T.url ? url : 0})` }}>
             Shop jamalilb.com
           </div>
         </div>
-        <div style={{ position: "absolute", left: 0, width: W, top: 0.775 * H, display: "flex", justifyContent: "center" }}>
+        <div style={{ position: "absolute", left: 0, width: W, top: 1282, display: "flex", justifyContent: "center" }}>
           <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 34, color: C.berry, border: `3px dashed ${C.berry}`, borderRadius: 999, padding: "14px 30px", background: "rgba(253,227,239,.7)", transform: `translateY(${(1 - code) * 40}px)`, opacity: f >= T.code ? Math.min(1, code * 1.5) : 0 }}>
             WELCOME10 · 10% off your first order
           </div>
