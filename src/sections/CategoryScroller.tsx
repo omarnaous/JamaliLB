@@ -1,7 +1,6 @@
-import { motion, useScroll, useTransform } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
-import { useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
+import { Carousel } from '../components/Carousel'
 import { getProduct, img, products } from '../lib/catalog'
 
 const CATS = [
@@ -16,64 +15,39 @@ const CATS = [
 
 const count = (c: string) => products.filter((p) => p.category === c).length
 
-/** Vertical scroll drives a horizontal track while the section is pinned. */
 export function CategoryScroller() {
-  const section = useRef<HTMLElement>(null)
-  const track = useRef<HTMLDivElement>(null)
-  const [distance, setDistance] = useState(0)
-
-  useLayoutEffect(() => {
-    const measure = () => setDistance(Math.max(0, (track.current?.scrollWidth ?? 0) - window.innerWidth))
-    measure()
-    const ro = new ResizeObserver(measure)
-    if (track.current) ro.observe(track.current)
-    window.addEventListener('resize', measure)
-    return () => {
-      ro.disconnect()
-      window.removeEventListener('resize', measure)
-    }
-  }, [])
-
-  const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] })
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance])
-  const bar = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-
   return (
-    <section ref={section} className="relative bg-ink text-cream" style={{ height: `calc(100vh + ${distance}px)` }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="container-x mb-8 flex items-end justify-between gap-6 md:mb-12">
+    <section className="overflow-hidden bg-ink py-20 text-cream md:py-28">
+      <Carousel
+        dark
+        header={
           <h2 className="font-display text-5xl leading-[0.9] md:text-8xl">
             Shop by <em className="text-blush">mood</em>
           </h2>
-          <div className="hidden w-48 md:block">
-            <p className="mb-2 text-right text-xs text-cream/50">Keep scrolling →</p>
-            <div className="h-px bg-cream/15">
-              <motion.div style={{ width: bar }} className="h-px bg-blush" />
-            </div>
-          </div>
-        </div>
-
-        <motion.div ref={track} style={{ x }} className="flex w-max gap-5 px-4 sm:px-6 lg:px-10">
-          {CATS.map((c, i) => {
-            const p = getProduct(c.hero)
-            return (
+        }
+      >
+        {CATS.map((c, i) => {
+          const p = getProduct(c.hero)
+          return (
+            <div key={c.name} className="shrink-0">
               <Link
-                key={c.name}
                 to={`/shop?category=${encodeURIComponent(c.name)}`}
-                className={`group relative flex h-[62vh] w-[78vw] shrink-0 flex-col justify-between overflow-hidden rounded-[36px] bg-gradient-to-br p-7 text-ink sm:w-[46vw] lg:w-[30vw] ${c.tone}`}
+                draggable={false}
+                className={`group relative flex h-[min(62vh,560px)] w-[78vw] select-none flex-col justify-between overflow-hidden rounded-[36px] bg-gradient-to-br p-7 text-ink sm:w-[44vw] lg:w-[min(30vw,440px)] ${c.tone}`}
               >
                 <div className="flex items-start justify-between">
                   <span className="font-display text-xl italic">0{i + 1}</span>
-                  <span className="grid size-12 place-items-center rounded-full bg-white/60 backdrop-blur transition-all duration-500 group-hover:rotate-45 group-hover:bg-ink group-hover:text-white">
+                  <span className="grid size-12 place-items-center rounded-full bg-white/60 backdrop-blur transition-all duration-300 group-hover:rotate-45 group-hover:bg-ink group-hover:text-white">
                     <ArrowUpRight className="size-5" />
                   </span>
                 </div>
                 {p && (
-                  <img
+                  <img decoding="async"
                     src={img(p.images[0], 700)}
                     alt=""
                     loading="lazy"
-                    className="absolute left-1/2 top-1/2 h-[58%] -translate-x-1/2 -translate-y-1/2 rounded-3xl object-contain mix-blend-multiply transition-transform duration-[900ms] ease-silk group-hover:-translate-y-[56%] group-hover:scale-110 group-hover:rotate-[-4deg]"
+                    draggable={false}
+                    className="absolute left-1/2 top-1/2 h-[58%] -translate-x-1/2 -translate-y-1/2 rounded-3xl object-contain mix-blend-multiply transition-transform duration-500 ease-silk group-hover:-translate-y-[54%] group-hover:scale-105"
                   />
                 )}
                 <div className="relative">
@@ -83,17 +57,21 @@ export function CategoryScroller() {
                   <p className="mt-1 font-display text-5xl leading-none md:text-6xl">{c.name}</p>
                 </div>
               </Link>
-            )
-          })}
-          <Link to="/shop" className="group grid h-[62vh] w-[60vw] shrink-0 place-items-center rounded-[36px] border border-cream/15 sm:w-[30vw] lg:w-[20vw]">
-            <span className="text-center font-display text-4xl leading-tight">
-              Shop
-              <br />
-              <em className="text-blush transition group-hover:tracking-wider">everything</em>
-            </span>
-          </Link>
-        </motion.div>
-      </div>
+            </div>
+          )
+        })}
+        <Link
+          to="/shop"
+          draggable={false}
+          className="group grid h-[min(62vh,560px)] w-[60vw] shrink-0 place-items-center rounded-[36px] border border-cream/15 transition-colors hover:border-blush sm:w-[30vw] lg:w-[20vw]"
+        >
+          <span className="text-center font-display text-4xl leading-tight">
+            Shop
+            <br />
+            <em className="text-blush">everything</em>
+          </span>
+        </Link>
+      </Carousel>
     </section>
   )
 }

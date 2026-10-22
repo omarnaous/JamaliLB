@@ -5,8 +5,7 @@ import { useRef } from 'react'
 export function PinkOctober() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const draw = useTransform(scrollYProgress, [0.1, 0.55], [0, 1])
-  const rotate = useTransform(scrollYProgress, [0, 1], [-12, 12])
+  const rotate = useTransform(scrollYProgress, [0, 1], [-8, 8])
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-[#ff5fa2] py-24 text-white md:py-32">
@@ -19,7 +18,10 @@ export function PinkOctober() {
             strokeWidth="16"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{ pathLength: draw }}
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true, margin: '-20% 0px' }}
+            transition={{ duration: 1.4, ease: [0.65, 0, 0.35, 1] }}
           />
         </motion.svg>
         <div>

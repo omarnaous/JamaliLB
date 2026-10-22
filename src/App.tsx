@@ -7,7 +7,7 @@ import { Header } from './components/Header'
 import { Intro } from './components/Intro'
 import { ScrollProgress } from './components/ScrollProgress'
 import { SearchOverlay } from './components/SearchOverlay'
-import { useSmoothScroll } from './hooks/useSmoothScroll'
+import { scrollToTop, useSmoothScroll } from './hooks/useSmoothScroll'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import ProductPage from './pages/Product'
@@ -24,12 +24,13 @@ export default function App() {
       <ScrollProgress />
       <AnnouncementBar />
       <Header />
-      <AnimatePresence mode="wait">
+      {/* Opacity only: a transform here would re-anchor every position:fixed child (buy bar, filter sheet). */}
+      <AnimatePresence mode="wait" onExitComplete={() => scrollToTop()}>
         <motion.main
           key={location.pathname}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
-          exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.35, ease: 'easeOut' } }}
+          exit={{ opacity: 0, transition: { duration: 0.15 } }}
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />

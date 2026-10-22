@@ -136,7 +136,7 @@ export function Header() {
                     <span className="eyebrow">The blush everyone’s asking for</span>
                     <p className="mt-2 max-w-[14ch] font-display text-3xl leading-none">{featured.title.replace('Rare Beauty - ', '')}</p>
                     <span className="mt-4 inline-block text-xs font-semibold underline underline-offset-4">Shop now</span>
-                    <img
+                    <img decoding="async"
                       src={img(featured.images[0], 400)}
                       alt=""
                       className="absolute -bottom-6 -right-4 h-44 mix-blend-multiply transition-transform duration-700 ease-silk group-hover:-translate-y-2 group-hover:rotate-[-6deg]"

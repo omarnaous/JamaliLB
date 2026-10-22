@@ -51,7 +51,10 @@ export function ProductTabs() {
           className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6"
         >
           {items.map((p, i) => (
-            <ProductCard key={p.handle} product={p} index={i} />
+            // 8 fills the 2- and 4-column grids; the 3-column (tablet) grid shows 6 so no row is left half-empty
+            <div key={p.handle} className={i >= 6 ? 'md:hidden lg:block' : undefined}>
+              <ProductCard product={p} index={i} />
+            </div>
           ))}
         </motion.div>
       </AnimatePresence>

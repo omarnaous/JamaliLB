@@ -33,9 +33,9 @@ export function FlushFinder() {
           </h2>
           <p className="mt-5 max-w-sm text-plum/75">Pick the vibe you want on your cheeks today — we’ll match it with the exact shades we stock.</p>
 
-          <div className="relative mt-10 aspect-square w-full max-w-[380px]">
+          <div className="relative mx-auto mt-8 aspect-square w-full max-w-[220px] sm:max-w-[300px] lg:mx-0 lg:mt-10 lg:max-w-[380px]">
             <motion.div
-              className="absolute inset-[8%] animate-blob shadow-[inset_-30px_-30px_80px_rgba(0,0,0,.12),inset_30px_30px_60px_rgba(255,255,255,.5)]"
+              className="absolute inset-[8%] blob-shape animate-blob will-change-transform shadow-[inset_-30px_-30px_80px_rgba(0,0,0,.12),inset_30px_30px_60px_rgba(255,255,255,.5)]"
               animate={{ backgroundColor: m.color }}
               transition={{ duration: 0.8, ease: EASE }}
             />
@@ -69,7 +69,7 @@ export function FlushFinder() {
             ))}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
             <AnimatePresence mode="popLayout">
               {picks.map(({ product, variant }, i) => (
                 <motion.div
@@ -78,24 +78,24 @@ export function FlushFinder() {
                   initial={{ opacity: 0, y: 40, rotate: -3 }}
                   animate={{ opacity: 1, y: 0, rotate: 0, transition: { delay: i * 0.08, duration: 0.6, ease: EASE } }}
                   exit={{ opacity: 0, y: -30, transition: { duration: 0.25 } }}
-                  className="group flex flex-col rounded-[28px] bg-white/80 p-3 shadow-[0_20px_50px_-30px_rgba(43,15,31,.4)] backdrop-blur"
+                  className="group flex min-w-0 flex-col rounded-[20px] bg-white/85 p-2 shadow-[0_20px_50px_-30px_rgba(43,15,31,.4)] sm:rounded-[28px] sm:p-3"
                 >
                   <Link to={`/products/${product.handle}`} className="block aspect-square overflow-hidden rounded-[22px] bg-shell">
-                    <img src={img(variant.image ?? product.images[0], 500)} alt={`${product.title} – ${variant.title}`} className="size-full object-contain p-4 mix-blend-multiply transition duration-700 group-hover:scale-110" />
+                    <img decoding="async" src={img(variant.image ?? product.images[0], 500)} alt={`${product.title} – ${variant.title}`} className="size-full object-contain p-2 mix-blend-multiply transition duration-500 group-hover:scale-110 sm:p-4" />
                   </Link>
-                  <div className="flex flex-1 flex-col px-1 pt-3">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">{product.brand}</p>
-                    <p className="line-clamp-1 text-sm font-medium">{product.title.replace(/^.*?-\s*/, '')}</p>
-                    <p className="text-xs capitalize text-berry">Shade: {variant.title}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm font-semibold">
+                  <div className="flex min-w-0 flex-1 flex-col px-0.5 pt-2 sm:px-1 sm:pt-3">
+                    <p className="truncate text-[9px] font-semibold uppercase tracking-[0.14em] text-mute sm:text-[10px] sm:tracking-[0.18em]">{product.brand}</p>
+                    <p className="line-clamp-1 text-xs font-medium sm:text-sm">{product.title.replace(/^.*?-\s*/, '')}</p>
+                    <p className="truncate text-[11px] capitalize text-berry sm:text-xs"><span className="hidden sm:inline">Shade: </span>{variant.title}</p>
+                    <div className="mt-2 flex flex-wrap items-center justify-between gap-1 sm:mt-3">
+                      <span className="text-xs font-semibold sm:text-sm">
                         {money(variant.price)}
-                        {discountPct(variant.price, variant.compareAt) > 0 && <span className="ml-1.5 text-xs font-normal text-mute line-through">{money(variant.compareAt!)}</span>}
+                        {discountPct(variant.price, variant.compareAt) > 0 && <span className="ml-1.5 hidden text-xs font-normal text-mute line-through sm:inline">{money(variant.compareAt!)}</span>}
                       </span>
                       <button
                         disabled={!variant.available}
                         onClick={() => add(product.handle, variant.id)}
-                        className="grid size-9 place-items-center rounded-full bg-ink text-white transition hover:bg-berry disabled:opacity-30"
+                        className="grid size-8 place-items-center rounded-full bg-ink text-white sm:size-9 transition hover:bg-berry disabled:opacity-30"
                         aria-label={`Add ${variant.title} to bag`}
                       >
                         <Plus className="size-4" />

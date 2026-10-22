@@ -12,6 +12,9 @@ export function ProductCard({ product, index = 0, priority = false }: { product:
   const wished = useShop((s) => s.wishlist.includes(product.handle))
   const toggleWish = useShop((s) => s.toggleWish)
   const [picking, setPicking] = useState(false)
+  // the alternate image is only fetched once someone actually hovers the card
+  const [hovered, setHovered] = useState(false)
+  const [altReady, setAltReady] = useState(false)
 
   const off = discountPct(product.price, product.compareAt)
   const isNew = product.collections.includes('new-arrivals')
@@ -37,6 +40,7 @@ export function ProductCard({ product, index = 0, priority = false }: { product:
       viewport={{ once: true, margin: '-5% 0px' }}
       transition={{ duration: 0.6, delay: (index % 4) * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="group relative"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setHovered(true)}
       onMouseLeave={() => setPicking(false)}
     >
       <motion.div
@@ -54,17 +58,18 @@ export function ProductCard({ product, index = 0, priority = false }: { product:
         className={`relative aspect-[4/5] overflow-hidden rounded-[28px] ${TINTS[index % TINTS.length]}`}
       >
         <Link to={`/products/${product.handle}`} className="absolute inset-0" aria-label={product.title}>
-          <img
+          <img decoding="async"
             src={img(product.images[0], 600)}
             alt={product.title}
             loading={priority ? 'eager' : 'lazy'}
-            className={`absolute inset-0 size-full object-contain p-[12%] mix-blend-multiply transition-all duration-700 ease-silk group-hover:scale-[1.06] ${product.images[1] ? 'group-hover:opacity-0' : ''} ${!product.available ? 'opacity-50 grayscale' : ''}`}
+            className={`absolute inset-0 size-full object-contain p-[12%] mix-blend-multiply transition-all duration-700 ease-silk group-hover:scale-[1.06] ${altReady ? 'group-hover:opacity-0' : ''} ${!product.available ? 'opacity-50 grayscale' : ''}`}
           />
-          {product.images[1] && (
-            <img
+          {hovered && product.images[1] && (
+            <img decoding="async"
               src={img(product.images[1], 600)}
               alt=""
               loading="lazy"
+              onLoad={() => setAltReady(true)}
               className="absolute inset-0 size-full scale-[1.06] object-contain p-[12%] opacity-0 mix-blend-multiply transition-all duration-700 ease-silk group-hover:scale-100 group-hover:opacity-100"
             />
           )}

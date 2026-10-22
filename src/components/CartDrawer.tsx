@@ -99,7 +99,7 @@ export function CartDrawer() {
                     {lines.map((l) => (
                       <motion.li key={l.variantId} layout exit={{ opacity: 0, x: 60, height: 0 }} transition={{ duration: 0.4, ease: EASE }} className="flex gap-4 py-4">
                         <Link to={`/products/${l.handle}`} onClick={() => setOpen(false)} className="size-24 shrink-0 overflow-hidden rounded-2xl bg-petal">
-                          <img src={img(l.variant.image ?? l.product.images[0], 240)} alt="" className="size-full object-contain p-2 mix-blend-multiply" />
+                          <img decoding="async" src={img(l.variant.image ?? l.product.images[0], 240)} alt="" className="size-full object-contain p-2 mix-blend-multiply" />
                         </Link>
                         <div className="flex min-w-0 flex-1 flex-col">
                           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">{l.product.brand}</p>
@@ -131,7 +131,7 @@ export function CartDrawer() {
                     {upsells.map((p) => (
                       <button key={p.handle} onClick={() => add(p.handle, p.variants.find((v) => v.available)!.id)} className="group rounded-2xl bg-white p-2 text-left ring-1 ring-ink/5 transition hover:ring-ink/20">
                         <div className="aspect-square overflow-hidden rounded-xl bg-petal">
-                          <img src={img(p.images[0], 200)} alt="" className="size-full object-contain p-1.5 mix-blend-multiply transition group-hover:scale-110" />
+                          <img decoding="async" src={img(p.images[0], 200)} alt="" className="size-full object-contain p-1.5 mix-blend-multiply transition group-hover:scale-110" />
                         </div>
                         <p className="mt-1.5 line-clamp-1 text-[11px]">{p.title}</p>
                         <p className="flex items-center justify-between text-[11px] font-semibold">

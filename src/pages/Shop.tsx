@@ -77,7 +77,7 @@ export default function Shop() {
   return (
     <div className="pb-24">
       <header className="relative overflow-hidden bg-petal">
-        <div className="absolute -right-24 -top-24 size-96 animate-blob bg-blush/50 blur-3xl" />
+        <div aria-hidden className="absolute -right-32 -top-32 size-[32rem] animate-drift rounded-full bg-[radial-gradient(closest-side,rgba(244,154,201,.55),transparent)] will-change-transform" />
         <div className="container-x relative pb-10 pt-14 md:pb-14 md:pt-20">
           <nav className="mb-6 text-xs text-mute">
             <Link to="/" className="hover:text-ink">

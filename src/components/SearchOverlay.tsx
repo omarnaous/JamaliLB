@@ -111,7 +111,7 @@ export function SearchOverlay() {
                       className={`flex items-center gap-4 rounded-2xl p-2 transition ${i === active ? 'bg-petal' : ''}`}
                     >
                       <span className="size-14 shrink-0 overflow-hidden rounded-xl bg-white">
-                        <img src={img(p.images[0], 160)} alt="" className="size-full object-contain p-1 mix-blend-multiply" />
+                        <img decoding="async" src={img(p.images[0], 160)} alt="" className="size-full object-contain p-1 mix-blend-multiply" />
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">{p.brand}</span>

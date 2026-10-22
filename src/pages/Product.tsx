@@ -52,7 +52,7 @@ export default function ProductPage() {
         <div className="min-w-0 lg:sticky lg:top-24 lg:h-fit">
           <div className="relative aspect-square overflow-hidden rounded-[36px] bg-gradient-to-br from-shell to-petal lg:aspect-auto lg:h-[min(72vh,720px)]">
             <AnimatePresence mode="wait">
-              <motion.img
+              <motion.img decoding="async"
                 key={gallery[imageIdx]}
                 src={img(gallery[imageIdx], 1200)}
                 alt={product.title}
@@ -82,7 +82,7 @@ export default function ProductPage() {
                   className={`size-20 shrink-0 overflow-hidden rounded-2xl bg-petal ring-2 transition ${i === imageIdx ? 'ring-ink' : 'ring-transparent hover:ring-ink/20'}`}
                   aria-label={`Image ${i + 1}`}
                 >
-                  <img src={img(g, 200)} alt="" className="size-full object-contain p-1.5 mix-blend-multiply" />
+                  <img decoding="async" src={img(g, 200)} alt="" className="size-full object-contain p-1.5 mix-blend-multiply" />
                 </button>
               ))}
             </div>
@@ -126,7 +126,7 @@ export default function ProductPage() {
                   >
                     {v.image ? (
                       <span className="size-8 overflow-hidden rounded-full bg-petal">
-                        <img src={img(v.image, 80)} alt="" className="size-full object-cover" />
+                        <img decoding="async" src={img(v.image, 80)} alt="" className="size-full object-cover" />
                       </span>
                     ) : (
                       <span className="size-1" />
@@ -207,7 +207,7 @@ export default function ProductPage() {
             className="fixed inset-x-3 bottom-3 z-30 mx-auto flex max-w-2xl items-center gap-3 rounded-full bg-ink/90 p-2 pl-2 text-white shadow-2xl backdrop-blur-xl"
           >
             <span className="size-11 shrink-0 overflow-hidden rounded-full bg-white">
-              <img src={img(variant.image ?? product.images[0], 100)} alt="" className="size-full object-contain p-1" />
+              <img decoding="async" src={img(variant.image ?? product.images[0], 100)} alt="" className="size-full object-contain p-1" />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-medium">{product.title}</span>

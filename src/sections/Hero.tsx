@@ -158,11 +158,11 @@ function Floater({
         <div className="animate-float" style={{ animationDelay: `${index * -1.3}s` }}>
           <Link
             to={`/products/${p.handle}`}
-            className="group block rounded-t-full rounded-b-[2rem] bg-white/70 p-2 shadow-[0_30px_60px_-20px_rgba(194,24,91,.35)] backdrop-blur-sm transition-transform duration-300 ease-silk hover:scale-105"
+            className="group block rounded-t-full rounded-b-[2rem] bg-white/85 p-2 shadow-[0_30px_60px_-20px_rgba(194,24,91,.35)] transition-transform duration-300 ease-silk hover:scale-105"
             aria-label={p.title}
           >
-            <span className="block aspect-[3/4] overflow-hidden rounded-t-full rounded-b-[1.6rem] bg-shell">
-              <img src={img(p.images[0], 420)} alt="" className="size-full object-contain p-3 mix-blend-multiply" />
+            <span className="block aspect-[3/4] overflow-hidden rounded-t-full rounded-b-[1.6rem] bg-white">
+              <img decoding="async" src={img(p.images[0], 420)} alt="" className="size-full object-contain p-3" />
             </span>
           </Link>
         </div>

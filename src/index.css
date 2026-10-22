@@ -34,8 +34,8 @@
     50% { transform: translate3d(6%, -4%, 0) scale(1.12); }
   }
   @keyframes blob {
-    0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; transform: rotate(0deg) scale(1); }
-    50% { border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%; transform: rotate(180deg) scale(1.08); }
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.08); }
   }
 }
 
@@ -82,6 +82,10 @@
 @utility text-outline {
   -webkit-text-stroke: 1px currentColor;
   color: transparent;
+}
+/* Organic shape for animate-blob; only its transform animates. */
+@utility blob-shape {
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
 }
 @utility no-scrollbar {
   scrollbar-width: none;

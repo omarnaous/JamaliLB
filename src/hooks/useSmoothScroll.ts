@@ -1,15 +1,13 @@
 import Lenis from 'lenis'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router'
 import { useShop } from '../store/shop'
 
 let lenis: Lenis | null = null
 
 export const scrollToTop = (immediate = true) => (lenis ? lenis.scrollTo(0, { immediate }) : window.scrollTo(0, 0))
 
-/** Lenis inertial scrolling, paused while an overlay is open and reset on navigation. */
+/** Lenis inertial scrolling, paused while an overlay is open. */
 export function useSmoothScroll() {
-  const { pathname } = useLocation()
   const locked = useShop((s) => s.cartOpen || s.searchOpen)
 
   useEffect(() => {
@@ -31,10 +29,4 @@ export function useSmoothScroll() {
     else lenis?.start()
     document.documentElement.style.overflow = locked ? 'hidden' : ''
   }, [locked])
-
-  useEffect(() => {
-    // Wait for the exiting page to leave before jumping to the top.
-    const t = setTimeout(() => scrollToTop(), 260)
-    return () => clearTimeout(t)
-  }, [pathname])
 }

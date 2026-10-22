@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { Reveal } from '../components/motion'
 import { STORE_URL, WELCOME_CODE } from '../lib/catalog'
@@ -7,16 +6,16 @@ import { STORE_URL, WELCOME_CODE } from '../lib/catalog'
 export function Newsletter() {
   return (
     <section className="container-x py-24 md:py-32">
-      <Reveal className="grain relative overflow-hidden rounded-[40px] bg-petal px-6 py-16 text-center md:px-16 md:py-24">
-        <motion.div className="absolute -left-20 -top-20 size-72 animate-blob bg-blush/60 blur-2xl" />
-        <motion.div className="absolute -bottom-24 -right-16 size-80 animate-blob bg-[#ffd6c9] blur-2xl [animation-delay:-8s]" />
+      <Reveal className="relative overflow-hidden rounded-[40px] bg-petal px-6 py-16 text-center md:px-16 md:py-24">
+        <div aria-hidden className="absolute -left-24 -top-24 size-96 animate-drift rounded-full bg-[radial-gradient(closest-side,rgba(244,154,201,.6),transparent)] will-change-transform" />
+        <div aria-hidden className="absolute -bottom-28 -right-20 size-[26rem] animate-drift rounded-full bg-[radial-gradient(closest-side,rgba(255,214,201,.9),transparent)] will-change-transform [animation-delay:-8s]" />
         <div className="relative">
           <p className="eyebrow mb-4">Join the glow list</p>
           <h2 className="mx-auto max-w-3xl font-display text-5xl leading-[0.95] md:text-7xl">
             Take <em className="text-berry">10% off</em> your first order
           </h2>
           <p className="mx-auto mt-5 max-w-md text-plum/75">
-            Get first dibs on new drops, restocks and members-only offers. Your welcome code is <b className="text-ink">{WELCOME_CODE}</b>.
+            Get first dibs on new drops and restocks. Your welcome code is <b className="text-ink">{WELCOME_CODE}</b>.
           </p>
           <form action={`${STORE_URL}/contact#contact_form`} method="post" target="_blank" className="mx-auto mt-8 flex max-w-md flex-col gap-2 sm:flex-row">
             <input type="hidden" name="form_type" value="customer" />
